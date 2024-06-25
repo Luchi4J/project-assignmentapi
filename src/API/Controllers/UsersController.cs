@@ -18,9 +18,9 @@ namespace API.Controllers
     public class UsersController : ApiController
     {
         protected readonly IHttpContextAccessor _httpContextAccessor; 
-        private readonly AzureMessagingService _messagingService;
+        private readonly AzureMessagingSendingService _messagingService;
 
-        public UsersController(IHttpContextAccessor httpContextAccessor, AzureMessagingService messagingService)
+        public UsersController(IHttpContextAccessor httpContextAccessor, AzureMessagingSendingService messagingService)
         {
             _httpContextAccessor = httpContextAccessor;
             _messagingService = messagingService;

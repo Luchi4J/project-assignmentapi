@@ -49,7 +49,7 @@ namespace ProjectAssignment.Infrastructure
                 var queueName = configuration["AzureServiceBus:QueueName"];
                 var mediator = provider.GetService<IMediator>();
 
-                return new AzureMessagingService(serviceBusConnectionString, queueName);
+                return new AzureMessagingSendingService(serviceBusConnectionString, queueName);
             });
             services.AddHostedService<AzureMessageReceivingService>();
             services.AddSingleton(_ => new ServiceBusClient(configuration["AzureServiceBus:ConnectionString"]));

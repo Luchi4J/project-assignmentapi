@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectAssignment.Application.Common.Interfaces
 {
-    public interface IAzureMessagingService
+    public interface IAzureMessagingSendingService
     {
         Task SendMessageAsync(string message);
 

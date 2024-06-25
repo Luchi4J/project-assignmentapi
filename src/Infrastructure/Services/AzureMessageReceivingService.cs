@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace ProjectAssignment.Infrastructure.Services
 {
-        public class AzureMessageReceivingService : BackgroundService
-        {
-            private readonly ServiceBusClient _client;
-            private readonly ServiceBusReceiver _receiver;
-            private readonly IMediator _mediator;
+    public class AzureMessageReceivingService : BackgroundService
+    {
+        private readonly ServiceBusClient _client;
+        private readonly ServiceBusReceiver _receiver;
+        private readonly IMediator _mediator;
 
         public AzureMessageReceivingService(ServiceBusClient client, ServiceBusReceiver receiver, IMediator mediator)
         {
@@ -24,29 +24,21 @@ namespace ProjectAssignment.Infrastructure.Services
             _receiver = receiver;
             _mediator = mediator;
         }
-            protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            while (!stoppingToken.IsCancellationRequested)
             {
-            try
-            {
-                while (!stoppingToken.IsCancellationRequested)
+                var message = await _receiver.ReceiveMessageAsync();
+                if (message != null)
                 {
-                    var message = await _receiver.ReceiveMessageAsync();
-                    if (message != null)
-                    {
-                        Console.WriteLine($"Received message: {message.Body}");
-                        var messageBody = message.Body.ToString();
-                        var request = JsonConvert.DeserializeObject<Request>(messageBody);
-                        var response = await _mediator.Send(request);
+                    Console.WriteLine($"Received message: {message.Body}");
+                    var messageBody = message.Body.ToString();
+                    var request = JsonConvert.DeserializeObject<Request>(messageBody);
+                    var response = await _mediator.Send(request);
 
-                        await _receiver.CompleteMessageAsync(message);
-                    }
+                    await _receiver.CompleteMessageAsync(message);
                 }
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            }
         }
+    }
 }

@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace ProjectAssignment.Infrastructure.Services
 {
-    public class AzureMessagingService : IAzureMessagingService 
+    public class AzureMessagingSendingService : IAzureMessagingSendingService 
     {
         private readonly IQueueClient _queueClient;
 
-        public AzureMessagingService(string serviceBusConnectionString, string queueName)
+        public AzureMessagingSendingService(string serviceBusConnectionString, string queueName)
         {
             _queueClient = new QueueClient(serviceBusConnectionString, queueName);
         }
