@@ -1,9 +1,7 @@
-﻿using ProjectAssignment.Infrastructure.Utility;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace ProjectAssignment.API.Controllers
 {

@@ -14,13 +14,11 @@ namespace ProjectAssignment.Infrastructure.Services
 {
     public class AzureMessageReceivingService : BackgroundService
     {
-        private readonly ServiceBusClient _client;
         private readonly ServiceBusReceiver _receiver;
         private readonly IMediator _mediator;
 
-        public AzureMessageReceivingService(ServiceBusClient client, ServiceBusReceiver receiver, IMediator mediator)
+        public AzureMessageReceivingService( ServiceBusReceiver receiver, IMediator mediator)
         {
-            _client = client;
             _receiver = receiver;
             _mediator = mediator;
         }
